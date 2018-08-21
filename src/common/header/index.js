@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { HeaderWrapper, Logo, Nav, NavItem, NavInput, Addition, Button, SearchWrapper } from './style';
+import { connect } from 'react-redux'
 
 class Header extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      focused: false
-    }
     this.handleInputFocuse = this.handleInputFocuse.bind(this);
     this.handleInputBlur = this.handleInputBlur.bind(this);
   }
@@ -24,16 +22,16 @@ class Header extends Component {
           </NavItem>
           <SearchWrapper>
           <CSSTransition
-          in={this.state.focused}
+          in={this.props.focused}
           timeout={900}
-          classNames="slide"
+          classNames="slide"  
           >
           <NavInput
-          className={this.state.focused ? 'focused' : ''}
+          className={this.props.focused ? 'focused' : ''}
           onFocus={this.handleInputFocuse}
           onBlur={this.handleInputBlur}/>
           </CSSTransition>
-          <i className={this.state.focused ? 'focused iconfont' : 'iconfont'} >&#xe617;</i>
+          <i className={this.props.focused ? 'focused iconfont' : 'iconfont'} >&#xe617;</i>
           </SearchWrapper>
         </Nav>
         <Addition>
@@ -56,5 +54,15 @@ class Header extends Component {
     })
   }
 }
+const mapStateToProps = (state) =>{
+  return {
+    focused: state.focused  
+  }
+}
+const mapDispathToProps = (state) =>{
+  return {
+    
+  }
+}
 
-export default Header;
+export default connect(mapStateToProps, mapDispathToProps)(Header);

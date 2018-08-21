@@ -35,10 +35,12 @@ export const NavItem =styled.div`
   line-height: 56px;
   &.left {
     float: left;
+    cursor: pointer;
   }
   &.right {
     float: right
     color: #969696
+    cursor: pointer;
   }
 `;
 
@@ -60,6 +62,7 @@ export const SearchWrapper = styled.div`
         background: #969696;
         color: #fff;
         font-size: 20px;
+        cursor: pointer;
       }
     }
     .slide-enter {
@@ -106,11 +109,12 @@ export const Button = styled.button`
   height: 38px;
   border: 1px solid rgba(236,97,73,.7);
   border-radius: 20px;
-  cursor: pointer;
   margin-top: 9px;
   margin-right: 20px;
   padding: 0 20px;
   font-size: 15px;
+  cursor: pointer;
+  outline: none;
   &.reg {
     color: #ec6149;
     background: #fff
