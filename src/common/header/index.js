@@ -20,22 +20,31 @@ import {
 
 class Header extends Component {
   getListArea() {
-    const { focused, list } = this.props;
-    if(focused){
+    const { focused, list, page, mouseIn, totalPage, handleMouseEnter, 
+            handleMouseLeave, handleChangePage} = this.props;
+    const pageList = [];
+    const newList = list.toJS();
+    for (let index = (page - 1) * 10; index < page * 10; index++) {
+      if(newList[index]) {
+      pageList.push(
+        <SearchInfoItem key={newList[index]}>{newList[index]}</SearchInfoItem>
+      )
+      }      
+    }
+    if(focused || mouseIn){
     return (
-      <SearchInfo>
+      <SearchInfo 
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      >
         <SearchInfoTitle>热门搜索
-        <SearchInfoSwitch>
+        <SearchInfoSwitch onClick={() => handleChangePage(page, totalPage)  }>
           <i className='SearchInfoIcon iconfont'>&#xe603;</i>
           换一批
         </SearchInfoSwitch>
         </SearchInfoTitle>
         <SearchInfoList>
-          {
-            list.map ((item) => {
-            return <SearchInfoItem key={item}>{item}</SearchInfoItem>
-          })
-        }
+          {pageList}
         </SearchInfoList>
       </SearchInfo>
     )
@@ -83,7 +92,10 @@ class Header extends Component {
 const mapStateToProps = (state) =>{
   return {
     focused: state.getIn(['header','focused']),
-    list: state.getIn(['header','list']) 
+    list: state.getIn(['header','list']),
+    page: state.getIn(['header','page']),
+    mouseIn: state.getIn(['header','mouseIn']),
+    totalPage: state.getIn(['header','totalPage']),
   }
 }
 const mapDispathToProps = (dispatch) =>{
@@ -94,7 +106,21 @@ const mapDispathToProps = (dispatch) =>{
     },
     handleInputBlur() {
       dispatch(actionCreators.searchBlur());  
-    }
+    },
+    handleMouseEnter() {
+      dispatch(actionCreators.mouseEnter());  
+    },
+    handleMouseLeave() {
+      dispatch(actionCreators.mouseLeave());  
+    },
+    handleChangePage(page,totalPage) {
+      if (page < totalPage) {
+        dispatch(actionCreators.pageChange(page + 1));
+      } else {
+        dispatch(actionCreators.pageChange(1));
+      }
+       
+    },
   }
 }
 
