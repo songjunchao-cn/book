@@ -114,17 +114,27 @@ export const SearchInfoTitle = styled.div `
   margin-bottom: 15px;
   line-height: 10px;
   font-size: 14px;
-  color: #969696; 
+  color: #969696;
 `
 export const SearchInfoSwitch = styled.span `
   float: right;
   font-size: 13px;
   cursor: pointer;
+  &:hover {
+    color: #333
+  }
   .SearchInfoIcon {
     position: absolute;
     right: 50px;
     top: 10px;
     font-size: 10px;
+  }
+  .spin {
+    display: block;
+    float: left;
+    transition: all .3s ease-in;
+    transform: rotate(100deg);
+    transform-origin: center center;
   }
 `
 export const SearchInfoItem = styled.a`
@@ -139,7 +149,9 @@ export const SearchInfoItem = styled.a`
   float: left;
   margin-left: 10px;
   margin-bottom: 10px;
-
+  &:hover {
+    color: #333
+  }
 `
 export const SearchInfoList = styled.div`
   overflow: hidden;
