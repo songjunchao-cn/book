@@ -38,7 +38,7 @@ class Header extends Component {
       onMouseLeave={handleMouseLeave}
       >
         <SearchInfoTitle>热门搜索
-        <SearchInfoSwitch onClick={() => handleChangePage(page, totalPage, this.spinIcon)  }>
+        <SearchInfoSwitch className='SearchInfoSwitch' onClick={() => handleChangePage(page, totalPage, this.spinIcon)  }>
           <i ref={(icon)=>{this.spinIcon = icon}} className='SearchInfoIcon iconfont spin'>&#xe603;</i>
           换一批  
         </SearchInfoSwitch>
